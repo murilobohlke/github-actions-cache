@@ -1,0 +1,33 @@
+name: Test cache
+
+on:
+  push:
+    branch:
+      - "main"
+
+jobs:
+  build:
+    name: Test
+    runs-on: macos-latest
+
+    steps:
+      - name: Set up Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          # cache: 'yarn'
+
+      # - name: Set up Cocoapods cache
+      #   uses: actions/cache@v3
+      #   id: cocoapods-cache
+      #   with:
+      #     path: Pods
+      #     key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-pods-
+
+      - name: Install dependencies
+        run: yarn install
