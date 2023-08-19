@@ -37,7 +37,7 @@ function Section({children, title}: SectionProps): JSX.Element {
         style={[
           styles.sectionTitle,
           {
-            color: isDarkMode ? Colors.white : Colors.black,
+            color: isDarkMode ? Colors.white : Colors.red,
           },
         ]}>
         {title}
