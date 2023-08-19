@@ -38,9 +38,10 @@ jobs:
             ${{ runner.os }}-pods-
 
       - name: Install dependencies
+        if: steps.node_modules.outputs.cache-hit != 'true'
         run: yarn install
 
       - name: Install pod dependencies
-        # if: steps.cocoapods-cache.outputs.cache-hit != 'true'
+        if: steps.cocoapods-cache.outputs.cache-hit != 'true'
         run: |
           cd ios && pod install
