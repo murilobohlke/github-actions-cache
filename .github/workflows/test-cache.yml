@@ -41,6 +41,6 @@ jobs:
         run: yarn install
 
       - name: Install pod dependencies
-        if: steps.cocoapods-cache.outputs.cache-hit != 'true'
+        # if: steps.cocoapods-cache.outputs.cache-hit != 'true'
         run: |
           cd ios && pod install
