@@ -28,17 +28,19 @@ jobs:
             **/node_modules
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}-${{ steps.node.outputs.version }}
 
-      # - name: Set up Cocoapods cache
-      #   uses: actions/cache@v3
-      #   id: cocoapods-cache
-      #   with:
-      #     path: Pods
-      #     key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-pods-
+      - name: Set up Cocoapods cache
+        uses: actions/cache@v3
+        id: cocoapods-cache
+        with:
+          path: ./ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
 
       - name: Install dependencies
         run: yarn install
 
-      - name: Install pods
-        run: cd ios && pod install
+      - name: Install pod dependencies
+        if: steps.cocoapods-cache.outputs.cache-hit != 'true'
+        run: |
+          cd ios && pod install
