@@ -39,3 +39,6 @@ jobs:
 
       - name: Install dependencies
         run: yarn install
+
+      - name: Install pods
+        run: cd ios && pod install
