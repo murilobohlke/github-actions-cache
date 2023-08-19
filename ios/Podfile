@@ -27,6 +27,8 @@ target 'water_app' do
   # Flags change depending on the env values.
   flags = get_default_flags()
 
+  pod 'Alamofire'
+
   use_react_native!(
     :path => config[:reactNativePath],
     # Hermes is now enabled by default. Disable by setting this flag to false.
